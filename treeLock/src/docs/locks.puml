@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+frame java.util.concurrent.locks{
+    interface Lock{
+        + public void lock()
+        + public void unlock()
+        + public void lockInterruptibly()
+        + public Condition newCondition()
+        + public boolean tryLock()
+        + public boolean tryLock(long time, TimeUnit unit)
+    }
+}
+
+class BakeryAlg implements Lock{
+    + private final AtomicInteger[] ticket;
+	+ private final AtomicBoolean[] choosing;
+    + public void lock()
+    + public void unlock()
+    + public void lockInterruptibly()
+    + public Condition newCondition()
+    + public boolean tryLock()
+    + public boolean tryLock(long time, TimeUnit unit)
+}
+
+frame java.util.concurrent{
+    interface Runnable{
+        + public void run()
+    }
+}
+
+class Counter implements Runnable{
+    + private final BakeryAlg bLock
+    + public void run()
+}
+
+
+Counter *-- BakeryAlg
+
+@enduml
